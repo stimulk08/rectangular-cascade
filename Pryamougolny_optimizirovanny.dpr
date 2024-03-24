@@ -66,32 +66,42 @@ SysUtils;
        for i=1 to k :
           begin
              fi[1,i]=sig[i]*xi[1,i]/(1+sig[i]*xi[1,i]);
-             fi[7,i]=sig[i]/(1+sig[i]); fi[2,i]=sig[i]*xi[2,i]/(1+sig[i]*xi[2,i]);
-             fi[4,i]=sig[i]*xi[4,i]/(1+sig[i]*xi[4,i]);
+             fi[2,i]=sig[i]*xi[2,i]/(1+sig[i]*xi[2,i]);
              fi[3,i]=sig[i]*xi[3,i]/(1+sig[i]*xi[3,i]);
+             fi[4,i]=sig[i]*xi[4,i]/(1+sig[i]*xi[4,i]);
              fi[5,i]=sig[i]*xi[5,i]/(1+sig[i]*xi[5,i]);
              fi[6,i]=sig[i]*xi[6,i]/(1+sig[i]*xi[6,i]);
+             fi[7,i]=sig[i]/(1+sig[i]);
           end;
        ll[1,1]=1; ll[2,1]=1; ll[3,1]=1;  ll[4,1]=1; ll[5,1]=1; ll[6,1]=1; ll[7,1]=1;
        for i=1 to k:
         begin
-           l[1,i]=fi[1,i]/(1-fi[1,i]);  l[2,i]=fi[2,i]/(1-fi[2,i]);
-           l[3,i]=fi[3,i]/(1-fi[3,i]);  l[4,i]=fi[4,i]/(1-fi[4,i]);
-           l[5,i]=fi[5,i]/(1-fi[5,i]);  l[6,i]=fi[6,i]/(1-fi[6,i]);
+           l[1,i]=fi[1,i]/(1-fi[1,i]);
+           l[2,i]=fi[2,i]/(1-fi[2,i]);
+           l[3,i]=fi[3,i]/(1-fi[3,i]);
+           l[4,i]=fi[4,i]/(1-fi[4,i]);
+           l[5,i]=fi[5,i]/(1-fi[5,i]);
+           l[6,i]=fi[6,i]/(1-fi[6,i]);
            l[7,i]=fi[7,i]/(1-fi[7,i]);
         end;
      for i=1 to k :
         begin
-           ll[1,1]=ll[1,1]*l[1,i];  ll[2,1]=ll[2,1]*l[2,i];
-           ll[3,1]=ll[3,1]*l[3,i];  ll[4,1]=ll[4,1]*l[4,i];
-           ll[5,1]=ll[5,1]*l[5,i];  ll[6,1]=ll[6,1]*l[6,i];
+           ll[1,1]=ll[1,1]*l[1,i];
+           ll[2,1]=ll[2,1]*l[2,i];
+           ll[3,1]=ll[3,1]*l[3,i];
+           ll[4,1]=ll[4,1]*l[4,i];
+           ll[5,1]=ll[5,1]*l[5,i];
+           ll[6,1]=ll[6,1]*l[6,i];
            ll[7,1]=ll[7,1]*l[7,i];
         end;
      for i=2 to k :
         begin
-           ll[1,i]=ll[1,i-1]/l[1,i-1];  ll[2,i]=ll[2,i-1]/l[2,i-1];
-           ll[3,i]=ll[3,i-1]/l[3,i-1];  ll[4,i]=ll[4,i-1]/l[4,i-1];
-           ll[5,i]=ll[5,i-1]/l[5,i-1];  ll[6,i]=ll[6,i-1]/l[6,i-1];
+           ll[1,i]=ll[1,i-1]/l[1,i-1];
+           ll[2,i]=ll[2,i-1]/l[2,i-1];
+           ll[3,i]=ll[3,i-1]/l[3,i-1];
+           ll[4,i]=ll[4,i-1]/l[4,i-1];
+           ll[5,i]=ll[5,i-1]/l[5,i-1];
+           ll[6,i]=ll[6,i-1]/l[6,i-1];
            ll[7,i]=ll[7,i-1]/l[7,i-1];
         end;
       {1 созвон тут закончили}
@@ -99,22 +109,30 @@ SysUtils;
       f74=1; f75=1; f76=1; f78=1;
      for i=1 to k:
         begin
-           f1=f1+ll[1,i]; f2=f2+ll[2,i]; f3=f3+ll[3,i];
-           f74=f74+ll[4,i]; f75=f75+ll[5,i]; f76=f76+ll[6,i]; f78=f78+ll[7,i];
+           f1=f1+ll[1,i];
+           f2=f2+ll[2,i];
+           f3=f3+ll[3,i];
+           f74=f74+ll[4,i];
+           f75=f75+ll[5,i];
+           f76=f76+ll[6,i];
+           f78=f78+ll[7,i];
         end;
        f4=0; f5=0; f6=0; f7=0; f8=0; f9=0; f10=0;
      for ip=1 to k :
         begin
            f11=1; f22=1; f33=1; f44=1; f55=1; f66=1; f77=1;
-           for i=ip+1 to k :
+           for i=ip+1 to k:
               begin
                  f11=f11+ll[1,i]; f22=f22+ll[2,i]; f33=f33+ll[3,i];
                  f44=f44+ll[4,i]; f55=f55+ll[5,i]; f66=f66+ll[6,i];
                  f77=f77+ll[7,i]
               end;
-           f4=f4+(T0[ip]*ko1[ip]-TM[ip+1]*ccm[1,ip+1]-TP[ip-1]*ccp[1,ip-1])*f11;  f5=f5+(T0[ip]*ko2[ip]-TM[ip+1]*ccm[2,ip+1]-TP[ip-1]*ccp[2,ip-1])*f22;
-           f6=f6+(T0[ip]*ko3[ip]-TM[ip+1]*ccm[3,ip+1]-TP[ip-1]*ccp[3,ip-1])*f33;  f7=f7+(T0[ip]*ko4[ip]-TM[ip+1]*ccm[4,ip+1]-TP[ip-1]*ccp[4,ip-1])*f44;
-           f8=f8+(T0[ip]*ko5[ip]-TM[ip+1]*ccm[5,ip+1]-TP[ip-1]*ccp[5,ip-1])*f55;  f9=f9+(T0[ip]*ko6[ip]-TM[ip+1]*ccm[6,ip+1]-TP[ip-1]*ccp[6,ip-1])*f66;
+           f4=f4+(T0[ip]*ko1[ip]-TM[ip+1]*ccm[1,ip+1]-TP[ip-1]*ccp[1,ip-1])*f11;
+           f5=f5+(T0[ip]*ko2[ip]-TM[ip+1]*ccm[2,ip+1]-TP[ip-1]*ccp[2,ip-1])*f22;
+           f6=f6+(T0[ip]*ko3[ip]-TM[ip+1]*ccm[3,ip+1]-TP[ip-1]*ccp[3,ip-1])*f33;
+           f7=f7+(T0[ip]*ko4[ip]-TM[ip+1]*ccm[4,ip+1]-TP[ip-1]*ccp[4,ip-1])*f44;
+           f8=f8+(T0[ip]*ko5[ip]-TM[ip+1]*ccm[5,ip+1]-TP[ip-1]*ccp[5,ip-1])*f55;
+           f9=f9+(T0[ip]*ko6[ip]-TM[ip+1]*ccm[6,ip+1]-TP[ip-1]*ccp[6,ip-1])*f66;
            f10=f10+(T0[ip]*(1-ko1[ip]-ko2[ip]-ko3[ip]-ko4[ip]-ko5[ip]-ko6[ip])-TM[ip+1]*(1-ccm[1,ip+1]-ccm[2,ip+1]-ccm[3,ip+1]-ccm[4,ip+1]-ccm[5,ip+1]-ccm[6,ip+1])
                 -TP[ip-1]*(1-ccp[1,ip-1]-ccp[2,ip-1]-ccp[3,ip-1]-ccp[4,ip-1]-ccp[5,ip-1]-ccp[6,ip-1]))*f77;
         end;
@@ -127,7 +145,7 @@ SysUtils;
      f=f4+f5+f6+f7+f8+f9+f10; T11=f; cm[1,1]=f4/f; cm[2,1]=f5/f; cm[3,1]=f6/f; cm[4,1]=f7/f; cm[5,1]=f8/f; cm[6,1]=f9/f;
      T1[1,1]=f4; T1[2,1]=f5; T1[3,1]=f6; T1[4,1]=f7; T1[5,1]=f8; T1[6,1]=f9; T1[7,1]=f10;
      f1=0; f2=0; f3=0; f84=0; f85=0; f86=0; f87=0;
-     for i=1 to k :
+     for i=1 to k:
         begin
            if i>1 then
               begin
@@ -140,17 +158,24 @@ SysUtils;
                  T1[7,i]=T1[7,i-1]-T0[i-1]*(1-ko1[i-1]-ko2[i-1]-ko3[i-1]-ko4[i-1]-ko5[i-1]-ko6[i-1])+TM[i]*(1-ccm[1,i]-ccm[2,i]-ccm[3,i]-ccm[4,i]-ccm[5,i]-ccm[6,i])
                         +TP[i-2]*(1-ccp[1,i-2]-ccp[2,i-2]-ccp[3,i-2]-ccp[4,i-2]-ccp[5,i-2]-ccp[6,i-2]);
               end;
-           f1=f1+T0[i]*ko1[i]-TM[i]*ccm[1,i]-TP[i]*ccp[1,i]; f2=f2+T0[i]*ko2[i]-TM[i]*ccm[2,i]-TP[i]*ccp[2,i];
-           f3=f3+T0[i]*ko3[i]-TM[i]*ccm[3,i]-TP[i]*ccp[3,i]; f84=f84+T0[i]*ko4[i]-TM[i]*ccm[4,i]-TP[i]*ccp[4,i];
-           f85=f85+T0[i]*ko5[i]-TM[i]*ccm[5,i]-TP[i]*ccp[5,i]; f86=f86+T0[i]*ko6[i]-TM[i]*ccm[6,i]-TP[i]*ccp[6,i];
+           f1=f1+T0[i]*ko1[i]-TM[i]*ccm[1,i]-TP[i]*ccp[1,i];
+           f2=f2+T0[i]*ko2[i]-TM[i]*ccm[2,i]-TP[i]*ccp[2,i];
+           f3=f3+T0[i]*ko3[i]-TM[i]*ccm[3,i]-TP[i]*ccp[3,i];
+           f84=f84+T0[i]*ko4[i]-TM[i]*ccm[4,i]-TP[i]*ccp[4,i];
+           f85=f85+T0[i]*ko5[i]-TM[i]*ccm[5,i]-TP[i]*ccp[5,i];
+           f86=f86+T0[i]*ko6[i]-TM[i]*ccm[6,i]-TP[i]*ccp[6,i];
            f87=f87+T0[i]*(1-ko1[i]-ko2[i]-ko3[i]-ko4[i]-ko5[i]-ko6[i])-TM[i]*(1-ccm[1,i]-ccm[2,i]-ccm[3,i]-ccm[4,i]-ccm[5,i]-ccm[6,i])
                 -TP[i]*(1-ccp[1,i]-ccp[2,i]-ccp[3,i]-ccp[4,i]-ccp[5,i]-ccp[6,i])
         end;
      f4=f1-f4; f5=f2-f5; f6=f3-f6; f7=f84-f7; f8=f85-f8; f9=f86-f9; f10=f87-f10;
      {print(' f4= ',f4:12:7,' f5= ',f5:12:7,' f6= ',f6:12:7,' f7= ',f7:12:7,' f8= ',f8:12:7,' f9= ',f9:12:7,' f10= ',f10:12:7);}
      T=f4+f5+f6+f7+f8+f9+f10; cp[1,k]=f4/T; cp[2,k]=f5/T; cp[3,k]=f6/T; cp[4,k]=f7/T; cp[5,k]=f8/T; cp[6,k]=f9/T;
-     km1=cm[1,1]; kp1=cp[1,k]; km2=cm[2,1]; kp2=cp[2,k];
-     km3=cm[3,1]; kp3=cp[3,k]; km4=cm[4,1]; kp4=cp[4,k]; km5=cm[5,1]; kp5=cp[5,k]; km6=cm[6,1]; kp6=cp[6,k];
+     km1=cm[1,1]; kp1=cp[1,k];
+     km2=cm[2,1]; kp2=cp[2,k];
+     km3=cm[3,1]; kp3=cp[3,k];
+     km4=cm[4,1]; kp4=cp[4,k];
+     km5=cm[5,1]; kp5=cp[5,k];
+     km6=cm[6,1]; kp6=cp[6,k];
 
      for i=1 to k :
          begin
@@ -158,11 +183,14 @@ SysUtils;
             for j=1 to i :
                begin
                   f11=1; f22=1; f33=1; f44=1; f55=1; f66=1; f77=1;
-                  for iss=j to i :
+                  for iss=j to i:
                      begin
-                        f11=f11*fi[1,iss]/(1-fi[1,iss]); f22=f22*fi[2,iss]/(1-fi[2,iss]);
-                        f33=f33*fi[3,iss]/(1-fi[3,iss]); f44=f44*fi[4,iss]/(1-fi[4,iss]);
-                        f55=f55*fi[5,iss]/(1-fi[5,iss]); f66=f66*fi[6,iss]/(1-fi[6,iss]);
+                        f11=f11*fi[1,iss]/(1-fi[1,iss]);
+                        f22=f22*fi[2,iss]/(1-fi[2,iss]);
+                        f33=f33*fi[3,iss]/(1-fi[3,iss]);
+                        f44=f44*fi[4,iss]/(1-fi[4,iss]);
+                        f55=f55*fi[5,iss]/(1-fi[5,iss]);
+                        f66=f66*fi[6,iss]/(1-fi[6,iss]);
                         f77=f77*fi[7,iss]/(1-fi[7,iss]);
                      end;
                   f1=f1+f11*T1[1,j]; f2=f2+f22*T1[2,j];
@@ -178,6 +206,7 @@ SysUtils;
             f44=fi[4,i]*f4; f55=fi[5,i]*f5; f66=fi[6,i]*f6; f77=fi[7,i]*f7;
             f=f11+f22+f33+f44+f55+f66+f77; gp[i]=f;
             cp[1,i]=f11/f; cp[2,i]=f22/f; cp[3,i]=f33/f; cp[4,i]=f44/f; cp[5,i]=f55/f; cp[6,i]=f66/f;
+
             f11=(1-fi[1,i])*f1; f22=(1-fi[2,i])*f2; f33=(1-fi[3,i])*f3;
             f44=(1-fi[4,i])*f4; f55=(1-fi[5,i])*f5; f66=(1-fi[6,i])*f6; f77=(1-fi[7,i])*f7;
             f=f11+f22+f33+f44+f55+f66+f77; gm[i]=f;

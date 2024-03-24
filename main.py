@@ -35,7 +35,7 @@ c = get_empty_matrix(count_m, 201)
 ll = get_empty_matrix(count_m, 201)
 l = get_empty_matrix(count_m, 201)
 fi = get_empty_matrix(count_m, 201)
-
+T1 = get_empty_matrix(count_m, 201)
 ccm = get_empty_matrix(count_m, count_k)
 ccp = get_empty_matrix(count_m, count_k)
 cc = get_empty_matrix(count_m, count_k)
@@ -53,10 +53,18 @@ ggm = get_empty_list(count_k)
 ggp = get_empty_list(count_k)
 gg = get_empty_list(count_k)
 a = get_empty_list(count_m)
+km = get_empty_list(count_m)
+kp = get_empty_list(count_m)
 f1 = 0
 f = 0
-f_fun = get_empty_list(count_k)
+T = 0
+f_fun = get_empty_list(count_m)
 ff_fun = get_empty_list(count_m)
+full_fun = get_empty_list(count_m)
+feel_fun = get_empty_list(count_m)
+fa = get_empty_list(count_m)
+
+f_amount = 0
 fmin = 0
 
 
@@ -71,7 +79,7 @@ def xis():
 
 
 def ras():
-    global f1
+    global f1, f_amount, T
     """
     f1=sqrt(xi[5,1])
     for i in range (1;k-1):
@@ -107,8 +115,6 @@ def ras():
     for i in range(1, k):
         for j in range(1, count_m):
             fi[j][i] = sig[i] * xi[j][1] / (1 + sig[i] * xi[j][1])
-
-    for i in range(1, count_m):
         fi[-1][i] = sig[i] / (1 + sig[i])
 
     # _________________________
@@ -142,7 +148,7 @@ def ras():
        ll[7,1]=ll[7,1]*l[7,i];
     """
     for i in range(1, k):
-        for j in range(1, count_m):
+        for j in range(1, count_m + 1):
             ll[j][1] = ll[j][1] * l[j][i]
 
     """
@@ -156,56 +162,109 @@ def ras():
         ll[7, i] = ll[7, i - 1] / l[7, i - 1];
     """
     for i in range(2, k):
-        for j in range(1, count_m):
+        for j in range(1, count_m + 1):
             ll[j][i] = ll[j][i - 1] / l[j][i - 1]
 
-    f1 = 1
-    f2 = 1
-    f3 = 1
-    f74 = 1
-    f75 = 1
-    f76 = 1
-    f78 = 1
+    for j in range(1, count_m + 1):
+        # f1=1; f2=1; f3=1;
+        # f74=1; f75=1; f76=1; f78=1;
+        full_fun[j] = 1
 
     for i in range(1, k):
-        f1 = f1 + ll[1][i]
-        f2 = f2 + ll[2][i]
-        f3 = f3 + ll[3][i]
-        f74 = f74 + ll[4][i]
-        f75 = f75 + ll[5][i]
-        f76 = f76 + ll[6][i]
-        f78 = f78 + ll[7][i]
+        for j in range(1, count_m + 1):
+            full_fun[j] += ll[j][i]
+
+    for j in range(1, count_m + 1):
+        f_fun[j] = 1
 
     for ip in range(1, k):
-        f11 = 1
-        f22 = 1
-        f33 = 1
-        f44 = 1
-        f55 = 1
-        f66 = 1
-        f77 = 1
+        for j in range(1, count_m + 1):
+            # f_fun == f[i][i] i in (1,7)
+            for i in range(ip + 1, k):
+                f_fun[j] += ll[j][i]
+        # ff_fun - f4-10
+        for j in range(1, count_m):
+            ff_fun[j] = (T0[ip] * k_zero[j][ip] - TM[ip + 1] * ccm[j][ip + 1] - TP[ip - 1] * ccp[j][ip - 1]) * f_fun[j]
 
-        f11 = f11 + ll[1][ip + 1]
-        f22 = f22 + ll[2][ip + 1]
-        f33 = f33 + ll[3][ip + 1]
-        f44 = f44 + ll[4][ip + 1]
-        f55 = f55 + ll[5][ip + 1]
-        f66 = f66 + ll[6][ip + 1]
-        f77 = f77 + ll[7][ip + 1]
+        k_zero_amount = sum([k_zero[j][ip] for j in range(1, count_m)])
+        ccm_amount = sum([ccm[j][ip + 1] for j in range(1, count_m)])
+        ccp_amount = sum([ccp[j][ip - 1] for j in range(1, count_m)])
 
-        f4 = f4 + (T0[ip] * k_zero[1][ip] - TM[ip + 1] * ccm[1][ip + 1] - TP[ip - 1] * ccp[1][ip - 1]) * f11
-        f5 = f5 + (T0[ip] * k_zero[2][ip] - TM[ip + 1] * ccm[2][ip + 1] - TP[ip - 1] * ccp[2][ip - 1]) * f22
-        f6 = f6 + (T0[ip] * k_zero[3][ip] - TM[ip + 1] * ccm[3][ip + 1] - TP[ip - 1] * ccp[3][ip - 1]) * f33
-        f7 = f7 + (T0[ip] * k_zero[4][ip] - TM[ip + 1] * ccm[4][ip + 1] - TP[ip - 1] * ccp[4][ip - 1]) * f44
-        f8 = f8 + (T0[ip] * k_zero[5][ip] - TM[ip + 1] * ccm[5][ip + 1] - TP[ip - 1] * ccp[5][ip - 1]) * f55
-        f9 = f9 + (T0[ip] * k_zero[6][ip] - TM[ip + 1] * ccm[6][ip + 1] - TP[ip - 1] * ccp[6][ip - 1]) * f66
-        f10 = f10 + (T0[ip] * (
-                1 - k_zero[1][ip] - k_zero[2][ip] - k_zero[3][ip] - k_zero[4][ip] - k_zero[5][ip] - k_zero[6][ip]) -
-                     TM[ip + 1] * (
-                             1 - ccm[1][ip + 1] - ccm[2][ip + 1] - ccm[3][ip + 1] - ccm[4][ip + 1] - ccm[5][ip + 1] -
-                             ccm[6][ip + 1]) - TP[ip - 1] * (
-                                 1 - ccp[1][ip - 1] - ccp[2][ip - 1] - ccp[3][ip - 1] - ccp[4][ip - 1] - ccp[5][ip - 1] - ccp[6][ip - 1])) * f77
+        ff_fun[count_m] = f_fun[count_m] + \
+                          (T0[ip] * (1 - k_zero_amount) - TM[ip + 1] * (1 - ccm_amount) - TP[ip - 1] * (1 - ccp_amount)) \
+                          * f_fun[count_m]
 
+    for j in range(1, count_m + 1):
+        ff_fun[j] = ff_fun[j] / full_fun[j]
+
+    f_amount = sum(ff_fun)
+    for j in range(1, count_m + 1):
+        cm[j][1] = ff_fun[j] / f_amount
+        T1[j][1] = ff_fun[j]
+
+    for i in range(1, k):
+        if i > 1:
+            for j in range(1, count_m + 1):
+                T1[j][i] = T1[j][i - 1] - T0[i - 1] * k_zero[j][i - 1] + TM[i] * ccm[j][i] + TP[i - 2] * ccp[j][i - 2]
+            k_zero_amount = 1 - sum([k_zero[j][i - 1] for j in range(1, count_m)])
+            ccm_amount = 1 - sum([ccm[j][i] for j in range(1, count_m)])
+            ccp_amount = 1 - sum([ccp[j][i - 2] for j in range(1, count_m)])
+
+            T1[count_m][i] = T1[count_m][i - 1] - T0[i - 1] * k_zero_amount + TM[i] * ccm_amount + TP[
+                i - 2] * ccp_amount
+        for j in range(1, count_m):
+            feel_fun[j] += T0[i] * k_zero[j][i] - TM[i] * ccm[j][i] - TP[i] * ccp[j][i]
+        k_zero_amount = 1 - sum([k_zero[j][i] for j in range(1, count_m)])
+        ccm_amount = 1 - sum([ccm[j][i] for j in range(1, count_m)])
+        ccp_amount = 1 - sum([ccp[j][i] for j in range(1, count_m)])
+        feel_fun[count_m] += T0[i] * k_zero_amount - TM[i] * ccm_amount - TP[i] * ccp_amount
+
+        for j in range(1, count_m + 1):
+            ff_fun[j] = feel_fun[j] - ff_fun[j]
+
+        T = sum(ff_fun)
+        for j in range(1, count_m):
+            cp[j][k] = ff_fun[j] / T
+
+        for j in range(1, count_m):
+            km[j] = cm[j][1]
+            kp[j] = cp[j][k]
+
+    for i in range(1, count_k):
+        for ii in range(1, i):
+            for j in range(1, count_m + 1):
+                f_fun[j] = 1
+            for iss in range(ii, i):
+                for j in range(1, count_m + 1):
+                    f_fun[j] *= fi[j][iss] / (1 - fi[j][iss])
+            for j in range(1, count_m + 1):
+                fa[j] += f_fun[j] * T1[j][ii]
+
+        for j in range(1, count_m + 1):
+            fa[j] /= fi[j][i]
+        f_amount = sum(fa)
+        g[i] = f_amount
+
+        for j in range(1, count_m + 1):
+            c[j][i] = fa[j] / f_amount
+
+        for j in range(1, count_m + 1):
+            f_fun[j] = fi[j][i] * fa[j]
+
+        f_amount = sum(f_fun)
+        gp[i] = f_amount
+
+        for j in range(1, count_m + 1):
+            cp[j][i] = f_fun[j] / f_amount
+
+        for j in range(1, count_m + 1):
+            f_fun[j] = (1 - fi[j][i]) * fa[j]
+
+        f_amount = sum(f_fun)
+        gm[i] = f_amount
+
+        for j in range(1, count_m + 1):
+            cm[j][i] = f_fun[j] / f_amount
 
 def iterx(gz):
     T0[1], T0[k], jj = 0, 0, 0
@@ -265,30 +324,8 @@ def iterx(gz):
 
 
 def pech():
-    f1 = T - T0[k];
-    f2 = T11 - T0[1];
-    print(' Gzak[1]= ', T0[1]: 14:10, ' Gzak[k]= ', T0[k]: 14:10);
-    print('  T= ', f1: 14:10, ' T11= ', f2: 14:10, ' TM= ', TM[jn]: 14:10, ' TP= ', TP[nn]: 14:10);
-
-    print(' cm[1,1]= ', cm[1, 1]: 22:19, ' cp[1,k]= ', cp[1, k]: 22:19);
-    print(' cm[2,1]= ', cm[2, 1]: 22:19, ' cp[2,k]= ', cp[2, k]: 22:19);
-    print(' cm[3,1]= ', cm[3, 1]: 22:19, ' cp[3,k]= ', cp[3, k]: 22:19);
-    print(' cm[4,1]= ', cm[4, 1]: 22:19, ' cp[4,k]= ', cp[4, k]: 22:19);
-    print(' cm[5,1]= ', cm[5, 1]: 22:19, ' cp[5,k]= ', cp[5, k]: 22:19);
-    print(' cm[6,1]= ', cm[6, 1]: 22:19, ' cp[6,k]= ', cp[6, k]: 22:19);
-    print(' cm[7,1]= ', 1 - cm[1, 1] - cm[2, 1] - cm[3, 1] - cm[4, 1] - cm[5, 1] - cm[6, 1]: 22:19, ' cp[7,k]= ', 1 -
-                                                                                                                  cp[
-                                                                                                                      1, k] -
-                                                                                                                  cp[
-                                                                                                                      2, k] -
-                                                                                                                  cp[
-                                                                                                                      3, k] -
-                                                                                                                  cp[
-                                                                                                                      4, k] -
-                                                                                                                  cp[
-                                                                                                                      5, k] -
-                                                                                                                  cp[
-                                                                                                                      6, k]: 22:19);
+    f1 = T - T0[k]
+    f2 = T11 - T0[1]
 
     def sech():
         global fs
