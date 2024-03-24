@@ -97,7 +97,7 @@ SysUtils;
       {1 созвон тут закончили}
       f1=1; f2=1; f3=1;
       f74=1; f75=1; f76=1; f78=1;
-     for i=1 to k :
+     for i=1 to k:
         begin
            f1=f1+ll[1,i]; f2=f2+ll[2,i]; f3=f3+ll[3,i];
            f74=f74+ll[4,i]; f75=f75+ll[5,i]; f76=f76+ll[6,i]; f78=f78+ll[7,i];
@@ -118,17 +118,12 @@ SysUtils;
            f10=f10+(T0[ip]*(1-ko1[ip]-ko2[ip]-ko3[ip]-ko4[ip]-ko5[ip]-ko6[ip])-TM[ip+1]*(1-ccm[1,ip+1]-ccm[2,ip+1]-ccm[3,ip+1]-ccm[4,ip+1]-ccm[5,ip+1]-ccm[6,ip+1])
                 -TP[ip-1]*(1-ccp[1,ip-1]-ccp[2,ip-1]-ccp[3,ip-1]-ccp[4,ip-1]-ccp[5,ip-1]-ccp[6,ip-1]))*f77;
         end;
-{     print(' f1= ',f1:12:7,' f2= ',f2:12:7,' f3= ',f3:12:7);
-     print(' f11= ',f11:12:7,' f22= ',f22:12:7,' f33= ',f3:12:7);
-     print(' f1= ',f1:12:7,' f2= ',f2:12:7,' f3= ',f3:12:7);
-     print(' f11= ',f11:12:7,' f22= ',f22:12:7,' f33= ',f3:12:7);}
 
 # T1 - транзитный поток
 # T0 - питание
 # К0 - питание конц
    
-  f4=f4/f1; f5=f5/f2; f6=f6/f3; f7=f7/f74; f8=f8/f75; f9=f9/f76; f10=f10/f78;
-     {print(' f4= ',f4:12:7,' f5= ',f5:12:7,' f6= ',f6:12:7,' f7= ',f7:12:7,' f8= ',f8:12:7,' f9= ',f9:12:7,' f10= ',f10:12:7);}
+     f4=f4/f1; f5=f5/f2; f6=f6/f3; f7=f7/f74; f8=f8/f75; f9=f9/f76; f10=f10/f78;
      f=f4+f5+f6+f7+f8+f9+f10; T11=f; cm[1,1]=f4/f; cm[2,1]=f5/f; cm[3,1]=f6/f; cm[4,1]=f7/f; cm[5,1]=f8/f; cm[6,1]=f9/f;
      T1[1,1]=f4; T1[2,1]=f5; T1[3,1]=f6; T1[4,1]=f7; T1[5,1]=f8; T1[6,1]=f9; T1[7,1]=f10;
      f1=0; f2=0; f3=0; f84=0; f85=0; f86=0; f87=0;
@@ -191,6 +186,7 @@ SysUtils;
          end;
     {До сюдова идем}
     end;
+
     procedure iterx;
        var a0,a1,a2,a3:extended;
        b11,b12,b13,b14,b15,b16,b17,b18,b19,b100,b101,b102:boolean;
@@ -210,9 +206,9 @@ gz- Заданный поток питания ступени
              ras;
              ko1[1]=cm[1,1]; ko2[1]=cm[2,1]; ko3[1]=cm[3,1]; ko4[1]=cm[4,1]; ko5[1]=cm[5,1]; ko6[1]=cm[6,1];
              ko1[k]=cp[1,k]; ko2[k]=cp[2,k]; ko3[k]=cp[3,k]; ko4[k]=cp[4,k]; ko5[k]=cp[5,k]; ko6[k]=cp[6,k];
-             if gz>gm[2] then T0[1]=gz-gm[2]else T0[1]=0; if gz>gp[k-1] then T0[k]=gz-gp[k-1]else T0[k]=0;
+             if gz>gm[2] then T0[1]=gz-gm[2]else T0[1]=0;
+             if gz>gp[k-1] then T0[k]=gz-gp[k-1]else T0[k]=0;
              bl2=false;
-             {print(' ii= ',ii:3,' T0[1]= ',T0[1]:12:8,' T0[k]= ',T0[k]:12:8); readln;}
              repeat
                 ras;
                 if gz>gm[2] then T0[1]=gz-gm[2]else T0[1]=0; if gz>gp[k-1] then T0[k]=gz-gp[k-1]else T0[k]=0;
@@ -226,7 +222,8 @@ gz- Заданный поток питания ступени
                      (abs(cp[1,k]-ko1[k])<1e-9) and (abs(cp[2,k]-ko2[k])<1e-9) and (abs(cp[3,k]-ko3[k])<1e-9) and (abs(cp[4,k]-ko4[k])<1e-9)
                     and (abs(cp[5,k]-ko5[k])<1e-9) and (abs(cp[6,k]-ko6[k])<1e-9);
 
-             until bl2 or (jj>500); if jj>500 then Bl=true else Bl=false;
+             until bl2 or (jj>500);
+             if jj>500 then Bl=true else Bl=false;
              {print(' jj= ',jj:3); readln;}
 
        end;
@@ -453,113 +450,113 @@ procedure pech;
      print(' бг¬¬  Ї®в®Є®ў ', f22:15:10);
      write(' ¤«п Їа®¤®«¦Ґ­Ёп ­ ¦¬ЁвҐ ENTER '); readln;
      print(' Є®­жҐ­ва жЁЁ 1-© Є®¬Ї®­Ґ­вл ');
-           for i=1 to k :
-              begin c[1,i]=(cm[1,i]*gm[i]+cp[1,i]*gp[i])/g[i];
-                    print(' cm[1,',i:3,']= ',cm[1,i]:14:12,' cp[1,',i:3,']= ',cp[1,i]:14:12,' c[1,',i:3,']= ',c[1,i]:14:12);
-                     if (i=22) or (i=44) or (i=66) or (i=88)  or (i=110) or (i=132) then
-                       begin
-                          print(' ¤«п Їа®¤®«¦Ґ­Ёп ­ ¦¬ЁвҐ ENTER '); readln;
-                       end;
-              end;
-           print(' ¤«п Їа®¤®«¦Ґ­Ёп ­ ¦¬ЁвҐ ENTER '); readln;
-           print(' Є®­жҐ­ва жЁЁ 2-© Є®¬Ї®­Ґ­вл ');
-           for i=1 to k :
-              begin
-                 c[2,i]=(cm[2,i]*gm[i]+cp[2,i]*gp[i])/g[i];
-                 print(' cm[2,',i:3,']= ',cm[2,i]:14:12,' cp[2,',i:3,']= ',cp[2,i]:14:12,' c[2,',i:3,']= ',c[2,i]:14:12);
-                      if (i=22) or (i=44) or (i=66) or (i=88)  or (i=110) or (i=132) then
-                       begin
-                          print(' ¤«п Їа®¤®«¦Ґ­Ёп ­ ¦¬ЁвҐ ENTER '); readln;
-                       end;
-              end;
-           write(' ¤«п Їа®¤®«¦Ґ­Ёп ­ ¦¬ЁвҐ ENTER '); readln;
-           print(' Є®­жҐ­ва жЁЁ 3-© Є®¬Ї®­Ґ­вл ');
-           for i=1 to k :
-              begin
-                 f=(cm[3,i]*gm[i]+cp[3,i]*gp[i])/g[i];
-                 f1=cm[3,i]; f2=cp[3,i];
-                 print(' cm[3,',i:3,']= ',f1:14:12,' cp[3,',i:3,']= ',f2:14:12,' c[3,',i:3,']= ',f:14:12);
-                      if (i=22) or (i=44) or (i=66) or (i=88)  or (i=110) or (i=132) then
-                       begin
-                          print(' ¤«п Їа®¤®«¦Ґ­Ёп ­ ¦¬ЁвҐ ENTER '); readln;
-                       end;
-              end;
-           write(' ¤«п Їа®¤®«¦Ґ­Ёп ­ ¦¬ЁвҐ ENTER '); readln;
-            print(' Є®­жҐ­ва жЁЁ 4-© Є®¬Ї®­Ґ­вл ');
-           for i=1 to k :
-              begin
-                 f=(cm[4,i]*gm[i]+cp[4,i]*gp[i])/g[i];
-                 f1=cm[4,i]; f2=cp[4,i];
-                 print(' cm[4,',i:3,']= ',f1:14:12,' cp[4,',i:3,']= ',f2:14:12,' c[4,',i:3,']= ',f:14:12);
-                      if (i=22) or (i=44) or (i=66) or (i=88)  or (i=110) or (i=132) then
-                       begin
-                          print(' ¤«п Їа®¤®«¦Ґ­Ёп ­ ¦¬ЁвҐ ENTER '); readln;
-                       end;
-              end;
-           write(' ¤«п Їа®¤®«¦Ґ­Ёп ­ ¦¬ЁвҐ ENTER '); readln;
-           print(' Є®­жҐ­ва жЁЁ 5-© Є®¬Ї®­Ґ­вл ');
-           for i=1 to k :
-              begin
-                 f=(cm[5,i]*gm[i]+cp[5,i]*gp[i])/g[i];
-                 f1=cm[5,i]; f2=cp[5,i];
-                 print(' cm[5,',i:3,']= ',f1:14:12,' cp[5,',i:3,']= ',f2:14:12,' c[5,',i:3,']= ',f:14:12);
-                      if (i=22) or (i=44) or (i=66) or (i=88)  or (i=110) or (i=132) then
-                       begin
-                          print(' ¤«п Їа®¤®«¦Ґ­Ёп ­ ¦¬ЁвҐ ENTER '); readln;
-                       end;
-              end;
-           write(' ¤«п Їа®¤®«¦Ґ­Ёп ­ ¦¬ЁвҐ ENTER '); readln;
-           print(' Є®­жҐ­ва жЁЁ 6-© Є®¬Ї®­Ґ­вл ');
-           for i=1 to k :
-              begin
-                 f=(cm[6,i]*gm[i]+cp[6,i]*gp[i])/g[i];
-                 f1=cm[6,i]; f2=cp[6,i];
-                 print(' cm[6,',i:3,']= ',f1:14:12,' cp[6,',i:3,']= ',f2:14:12,' c[6,',i:3,']= ',f:14:12);
-                      if (i=22) or (i=44) or (i=66) or (i=88)  or (i=110) or (i=132) then
-                       begin
-                          print(' ¤«п Їа®¤®«¦Ґ­Ёп ­ ¦¬ЁвҐ ENTER '); readln;
-                       end;
-              end;
-           write(' ¤«п Їа®¤®«¦Ґ­Ёп ­ ¦¬ЁвҐ ENTER '); readln;
-           print(' Є®­жҐ­ва жЁЁ 7-© Є®¬Ї®­Ґ­вл ');
-           for i=1 to k :
-              begin
-                 f=((1-cm[1,i]-cm[2,i]-cm[3,i]-cm[4,i]-cm[5,i]-cm[6,i])*gm[i]+(1-cp[1,i]-cp[2,i]-cp[3,i]-cp[4,i]-cp[5,i]-cp[6,i])*gp[i])/g[i];
-                 f1=1-cm[1,i]-cm[2,i]-cm[3,i]-cm[4,i]-cm[5,i]-cm[6,i]; f2=1-cp[1,i]-cp[2,i]-cp[3,i]-cp[4,i]-cp[5,i]-cp[6,i];
-                 print(' cm[7,',i:3,']= ',f1:14:12,' cp[7,',i:3,']= ',f2:14:12,' c[7,',i:3,']= ',f:14:12);
-                      if (i=22) or (i=44) or (i=66) or (i=88)  or (i=110) or (i=132) then
-                       begin
-                          print(' ¤«п Їа®¤®«¦Ґ­Ёп ­ ¦¬ЁвҐ ENTER '); readln;
-                       end;
-              end;
-           write(' ¤«п Їа®¤®«¦Ґ­Ёп ­ ¦¬ЁвҐ ENTER '); readln;
-           print(' ®в­®бЁвҐ«м­лҐ Є®­жҐ­ва жЁЁ 2/5-© Є®¬Ї®­Ґ­вл');
-           for i=1 to k :
-              begin
-                 f=cm[2,i]/(1-cm[1,i]-cm[2,i]-cm[3,i]-cm[4,i]-cm[5,i]-cm[6,i]); f1=cp[2,i]/(1-cp[1,i]-cp[2,i]-cp[3,i]-cp[4,i]-cp[5,i]-cp[6,i]);
-                 f2=c[2,i]/(1-c[1,i]-c[2,i]-c[3,i]-c[4,i]-c[5,i]-c[6,i]);
-                 {f=rm[i]; f1=rp[i]; f2=r[i];}
-                 print(' rm[2,',i:3,']= ',f:12,' rp[2,',i:3,']= ',f1:12,' r[2,',i:3,']= ',f2:12);
+     for i=1 to k :
+          begin c[1,i]=(cm[1,i]*gm[i]+cp[1,i]*gp[i])/g[i];
+                print(' cm[1,',i:3,']= ',cm[1,i]:14:12,' cp[1,',i:3,']= ',cp[1,i]:14:12,' c[1,',i:3,']= ',c[1,i]:14:12);
                  if (i=22) or (i=44) or (i=66) or (i=88)  or (i=110) or (i=132) then
-                    begin
-                       print(' ¤«п Їа®¤®«¦Ґ­Ёп ­ ¦¬ЁвҐ ENTER '); readln;
-                    end;
+                 begin
+                      print(' ¤«п Їа®¤®«¦Ґ­Ёп ­ ¦¬ЁвҐ ENTER '); readln;
+                 end;
+     end;
+     print(' ¤«п Їа®¤®«¦Ґ­Ёп ­ ¦¬ЁвҐ ENTER '); readln;
+     print(' Є®­жҐ­ва жЁЁ 2-© Є®¬Ї®­Ґ­вл ');
+     for i=1 to k :
+     begin
+         c[2,i]=(cm[2,i]*gm[i]+cp[2,i]*gp[i])/g[i];
+         print(' cm[2,',i:3,']= ',cm[2,i]:14:12,' cp[2,',i:3,']= ',cp[2,i]:14:12,' c[2,',i:3,']= ',c[2,i]:14:12);
+              if (i=22) or (i=44) or (i=66) or (i=88)  or (i=110) or (i=132) then
+               begin
+                  print(' ¤«п Їа®¤®«¦Ґ­Ёп ­ ¦¬ЁвҐ ENTER '); readln;
+               end;
+     end;
+     write(' ¤«п Їа®¤®«¦Ґ­Ёп ­ ¦¬ЁвҐ ENTER '); readln;
+     print(' Є®­жҐ­ва жЁЁ 3-© Є®¬Ї®­Ґ­вл ');
+     for i=1 to k :
+      begin
+         f=(cm[3,i]*gm[i]+cp[3,i]*gp[i])/g[i];
+         f1=cm[3,i]; f2=cp[3,i];
+         print(' cm[3,',i:3,']= ',f1:14:12,' cp[3,',i:3,']= ',f2:14:12,' c[3,',i:3,']= ',f:14:12);
+              if (i=22) or (i=44) or (i=66) or (i=88)  or (i=110) or (i=132) then
+               begin
+                  print(' ¤«п Їа®¤®«¦Ґ­Ёп ­ ¦¬ЁвҐ ENTER '); readln;
+               end;
+      end;
+      write(' ¤«п Їа®¤®«¦Ґ­Ёп ­ ¦¬ЁвҐ ENTER '); readln;
+      print(' Є®­жҐ­ва жЁЁ 4-© Є®¬Ї®­Ґ­вл ');
+      for i=1 to k :
+       begin
+         f=(cm[4,i]*gm[i]+cp[4,i]*gp[i])/g[i];
+         f1=cm[4,i]; f2=cp[4,i];
+         print(' cm[4,',i:3,']= ',f1:14:12,' cp[4,',i:3,']= ',f2:14:12,' c[4,',i:3,']= ',f:14:12);
+              if (i=22) or (i=44) or (i=66) or (i=88)  or (i=110) or (i=132) then
+               begin
+                  print(' ¤«п Їа®¤®«¦Ґ­Ёп ­ ¦¬ЁвҐ ENTER '); readln;
+               end;
        end;
-    write(' ¤«п Їа®¤®«¦Ґ­Ёп ­ ¦¬ЁвҐ ENTER '); readln;
-    print(' ®в­®бЁвҐ«м­лҐ Є®­жҐ­ва жЁЁ 1/5-© Є®¬Ї®­Ґ­вл');
-           for i=1 to k :
-              begin
-                 f=cm[1,i]/(1-cm[1,i]-cm[2,i]-cm[3,i]-cm[4,i]-cm[5,i]-cm[6,i]); f1=cp[1,i]/(1-cp[1,i]-cp[2,i]-cp[3,i]-cp[4,i]-cp[5,i]-cp[6,i]);
-                 f2=c[1,i]/(1-c[1,i]-c[2,i]-c[3,i]-c[4,i]-c[5,i]-c[6,i]);
-                 {f=rm[i]; f1=rp[i]; f2=r[i];}
-                 print(' rm[1,',i:3,']= ',f:12,' rp[1,',i:3,']= ',f1:12,' r[1,',i:3,']= ',f2:12);
-                 if (i=22) or (i=44) or (i=66) or (i=88)  or (i=110) or (i=132) then
-                    begin
-                       print(' ¤«п Їа®¤®«¦Ґ­Ёп ­ ¦¬ЁвҐ ENTER '); readln;
-                    end;
+       write(' ¤«п Їа®¤®«¦Ґ­Ёп ­ ¦¬ЁвҐ ENTER '); readln;
+       print(' Є®­жҐ­ва жЁЁ 5-© Є®¬Ї®­Ґ­вл ');
+       for i=1 to k :
+          begin
+             f=(cm[5,i]*gm[i]+cp[5,i]*gp[i])/g[i];
+             f1=cm[5,i]; f2=cp[5,i];
+             print(' cm[5,',i:3,']= ',f1:14:12,' cp[5,',i:3,']= ',f2:14:12,' c[5,',i:3,']= ',f:14:12);
+                  if (i=22) or (i=44) or (i=66) or (i=88)  or (i=110) or (i=132) then
+                   begin
+                      print(' ¤«п Їа®¤®«¦Ґ­Ёп ­ ¦¬ЁвҐ ENTER '); readln;
+                   end;
+          end;
+       write(' ¤«п Їа®¤®«¦Ґ­Ёп ­ ¦¬ЁвҐ ENTER '); readln;
+       print(' Є®­жҐ­ва жЁЁ 6-© Є®¬Ї®­Ґ­вл ');
+       for i=1 to k :
+          begin
+             f=(cm[6,i]*gm[i]+cp[6,i]*gp[i])/g[i];
+             f1=cm[6,i]; f2=cp[6,i];
+             print(' cm[6,',i:3,']= ',f1:14:12,' cp[6,',i:3,']= ',f2:14:12,' c[6,',i:3,']= ',f:14:12);
+                  if (i=22) or (i=44) or (i=66) or (i=88)  or (i=110) or (i=132) then
+                   begin
+                      print(' ¤«п Їа®¤®«¦Ґ­Ёп ­ ¦¬ЁвҐ ENTER '); readln;
+                   end;
+          end;
+       write(' ¤«п Їа®¤®«¦Ґ­Ёп ­ ¦¬ЁвҐ ENTER '); readln;
+       print(' Є®­жҐ­ва жЁЁ 7-© Є®¬Ї®­Ґ­вл ');
+       for i=1 to k :
+          begin
+             f=((1-cm[1,i]-cm[2,i]-cm[3,i]-cm[4,i]-cm[5,i]-cm[6,i])*gm[i]+(1-cp[1,i]-cp[2,i]-cp[3,i]-cp[4,i]-cp[5,i]-cp[6,i])*gp[i])/g[i];
+             f1=1-cm[1,i]-cm[2,i]-cm[3,i]-cm[4,i]-cm[5,i]-cm[6,i]; f2=1-cp[1,i]-cp[2,i]-cp[3,i]-cp[4,i]-cp[5,i]-cp[6,i];
+             print(' cm[7,',i:3,']= ',f1:14:12,' cp[7,',i:3,']= ',f2:14:12,' c[7,',i:3,']= ',f:14:12);
+                  if (i=22) or (i=44) or (i=66) or (i=88)  or (i=110) or (i=132) then
+                   begin
+                      print(' ¤«п Їа®¤®«¦Ґ­Ёп ­ ¦¬ЁвҐ ENTER '); readln;
+                   end;
+          end;
+       write(' ¤«п Їа®¤®«¦Ґ­Ёп ­ ¦¬ЁвҐ ENTER '); readln;
+       print(' ®в­®бЁвҐ«м­лҐ Є®­жҐ­ва жЁЁ 2/5-© Є®¬Ї®­Ґ­вл');
+       for i=1 to k :
+          begin
+             f=cm[2,i]/(1-cm[1,i]-cm[2,i]-cm[3,i]-cm[4,i]-cm[5,i]-cm[6,i]); f1=cp[2,i]/(1-cp[1,i]-cp[2,i]-cp[3,i]-cp[4,i]-cp[5,i]-cp[6,i]);
+             f2=c[2,i]/(1-c[1,i]-c[2,i]-c[3,i]-c[4,i]-c[5,i]-c[6,i]);
+             {f=rm[i]; f1=rp[i]; f2=r[i];}
+             print(' rm[2,',i:3,']= ',f:12,' rp[2,',i:3,']= ',f1:12,' r[2,',i:3,']= ',f2:12);
+             if (i=22) or (i=44) or (i=66) or (i=88)  or (i=110) or (i=132) then
+                begin
+                   print(' ¤«п Їа®¤®«¦Ґ­Ёп ­ ¦¬ЁвҐ ENTER '); readln;
+                end;
        end;
-    write(' ¤«п Їа®¤®«¦Ґ­Ёп ­ ¦¬ЁвҐ ENTER '); readln;
-    {print(' Є®нддЁжЁҐ­вл beta Ї® Є®¬Ї®­Ґ­в ¬ ');
+       write(' ¤«п Їа®¤®«¦Ґ­Ёп ­ ¦¬ЁвҐ ENTER '); readln;
+       print(' ®в­®бЁвҐ«м­лҐ Є®­жҐ­ва жЁЁ 1/5-© Є®¬Ї®­Ґ­вл');
+       for i=1 to k :
+          begin
+             f=cm[1,i]/(1-cm[1,i]-cm[2,i]-cm[3,i]-cm[4,i]-cm[5,i]-cm[6,i]); f1=cp[1,i]/(1-cp[1,i]-cp[2,i]-cp[3,i]-cp[4,i]-cp[5,i]-cp[6,i]);
+             f2=c[1,i]/(1-c[1,i]-c[2,i]-c[3,i]-c[4,i]-c[5,i]-c[6,i]);
+             {f=rm[i]; f1=rp[i]; f2=r[i];}
+             print(' rm[1,',i:3,']= ',f:12,' rp[1,',i:3,']= ',f1:12,' r[1,',i:3,']= ',f2:12);
+             if (i=22) or (i=44) or (i=66) or (i=88)  or (i=110) or (i=132) then
+                begin
+                   print(' ¤«п Їа®¤®«¦Ґ­Ёп ­ ¦¬ЁвҐ ENTER '); readln;
+                end;
+       end;
+       write(' ¤«п Їа®¤®«¦Ґ­Ёп ­ ¦¬ЁвҐ ENTER '); readln;
+
        for i=1 to k :
           begin
              f3=gp[i]/gm[i];
@@ -581,20 +578,7 @@ procedure pech;
               end;
         end;
      print(' ¤«п Їа®¤®«¦Ґ­Ёп ­ ¦¬ЁвҐ ENTER '); readln;
-     {print(' Є®нддЁжЁҐ­вл а §¤Ґ«Ґ­Ёп alfa Ё beta ®в­Ґб. Є 5-¬г Є®¬Ї®­Ґ­вг ');
-       for i=1 to k :
-          begin
-             f=cp[1,i]/(1-cp[1,i]-cp[2,i]-cp[3,i]-cp[4,i])/c[1,i]*(1-c[1,i]-c[2,i]-c[3,i]-c[4,i]);
-             f1=cp[2,i]/(1-cp[1,i]-cp[2,i]-cp[3,i]-cp[4,i])/c[2,i]*(1-c[1,i]-c[2,i]-c[3,i]-c[4,i]);
-             f2=c[1,i]/(1-c[1,i]-c[2,i]-c[3,i]-c[4,i])/cm[1,i]*(1-cm[1,i]-cm[2,i]-cm[3,i]-cm[4,i]);
-             f3=c[2,i]/(1-c[1,i]-c[2,i]-c[3,i]-c[4,i])/cm[2,i]*(1-cm[1,i]-cm[2,i]-cm[3,i]-cm[4,i]);
-             print(' a[1,',i:3,']= ',f:7:5,' a[2,',i:3,']= ',f1:7:5,' b[1,',i:3,']= ',f2:7:5,' b[2,',i:3,']= ',f3:7:5);
-             if (i=22) or (i=44) or (i=66) or (i=88)  or (i=110) or (i=132) then
-                begin
-                   print(' ¤«п Їа®¤®«¦Ґ­Ёп ­ ¦¬ЁвҐ ENTER '); readln;
-                end;
-          end;}
-   end;
+   end; {Тут пиздец}
 
 begin
     { TO: -oUser -cConsole Main : Insert code here }
@@ -608,8 +592,10 @@ begin
 
 
      m1=92; m2=94; m3=95; m4=96; m5=97; m6=98; m7=100;
+     {
      for i in range (1;k):
          n[i]=2;
+     }
 
      {Ran:mize;}
      {print ('vvod nomera izotopa - ogranichenie cmax'); input(iz);}
@@ -623,19 +609,24 @@ begin
          xi[5,i]=exp((m7-m5)/(m7-m4)*ln(xi[4,i]));
          xi[6,i]=exp((m7-m6)/(m7-m4)*ln(xi[4,i]));
 
-     print(' xi1= ',xi[1,1]:12:8,' xi2= ',xi[2,1]:12:8,' xi3= ',xi[3,1]:12:8,' xi4= ',xi[4,1]:12:8,' xi5= ',xi[5,1]:12:8,' xi6= ',xi[6,1]:12:8);
+     print('
+     xi1= ',xi[1,1]:12:8,'
+     xi2= ',xi[2,1]:12:8,'
+     xi3= ',xi[3,1]:12:8,'
+     xi4= ',xi[4,1]:12:8,'
+     xi5= ',xi[5,1]:12:8,'
+     xi6= ',xi[6,1]:12:8);
 
      readln;
 
      f1=sqrt(xi[5,1]);
      for i in range (1;k-1):
            f2=xi[5,1]/f1;
-           sig[i]={(f2-1)/f2/(f1-1)}0.2973;
-           {f1=f2}
+           sig[i]=0.2973;
      f1=sqrt(xi[3,1]);
      for i=k:
            f2=xi[3,1]/f1;
-           sig[i]={(f2-1)/f2/(f1-1)}0.2973;
+           sig[i]=0.2973;
            {f1=f2}
 
 
@@ -643,15 +634,14 @@ begin
      {print(' :p otbor - tpd'); input(tpd);}
      print(' vvod gz'); input(gz);
      iterx; print(' ii= ',ii:3,' jj= ',jj:3);
-     {for iin range (1;k):
-          print(' i= ',i:3, ' xi[4,i]= ',xi[4,i]:12:8,' xxi[4,i]= ',xxi[4,i]:12:8);}
+
 
      f=0; for i in range (1;k):
          f=f+xi[4,i]; 
          print(' sred xi[4,i]= ',f/k:15:12);
      nn=jp; sech; sech1; sech2;
      print(' sech T= ',fs1:12:8,' sech T11= ',fs:12:8,' sech TP= ',fs2:12:8);
-     cmax=cp[iz,jp]; 
+     cmax=cp[iz,jp];
      print('cmax=',cmax:12:9,' nn=',nn:3); readln;
      pech;
 
@@ -663,8 +653,6 @@ begin
      print(' sg= ',sg:15:4);
      print(' sred g= ',f/k:12:8);
      print(' sig[1]= ',sig[1]:12:9,' sig[k]= ',sig[k]:12:9); readln;
-
-
 
      {cz=cmax;}
      f1=0; for iin range (1;k):
@@ -683,35 +671,18 @@ begin
      sech; sech1; sech2;
      print(' sech T= ',fs1:12:8,' sech T11= ',fs:12:8,' sech TP= ',fs2:12:8);
      print(' cmax=',cz:16:14);
-     {TP[nn]=tpd;
-     print('sg=',sg:15:4,' nn=',nn:3);}
 
-     {ii=0; jp=nn;
-     for i=1 to 6 : ccp[i,jp]=cp[i,jp];
-     bl2=false;
-     repeat
-       ras; for i=1 to 6 : ccp[i,jp]=(ccp[i,jp]+cp[i,jp])/2;
-            for i=1 to 6 : ccm[i,jp]=(ccm[i,jp]+cm[i,jp])/2;
-       ii=ii+1;
-       bl2=(abs(ccp[1,jp]-cp[1,jp])<1e-12) and (abs(ccp[2,jp]-cp[2,jp])<1e-12) and (abs(ccp[3,jp]-cp[3,jp])<1e-12) and (abs(ccp[4,jp]-cp[4,jp])<1e-12) and (abs(ccp[5,jp]-cp[5,jp])<1e-12) and (abs(ccp[6,jp]-cp[6,jp])<1e-12) and
-            (abs(ccm[1,jp]-cm[1,jp])<1e-12) and (abs(ccm[2,jp]-cm[2,jp])<1e-12) and (abs(ccm[3,jp]-cm[3,jp])<1e-12) and (abs(ccm[4,jp]-cm[4,jp])<1e-12) and (abs(ccm[5,jp]-cm[5,jp])<1e-12)and (abs(ccm[6,jp]-cm[6,jp])<1e-12);
-
-     until bl2;}
 
      f=0; for i=1 to k : f=f+g[i]; f1=0; for i=1 to k : f1=f1+sqr(g[i]-gz);
      fmin=f1; print(' fmin= ',fmin:15:8);
      print(' povtor calculation: Suuma G =',f:15:4,' nn=',nn:3,' cp[iz,nn]= ',cp[iz,nn]:12:8);
      print; pech;
      :potbor;
-     {f=0; for i=1 to k : f=f+g[i];
-     print(' summa G= ',f:15:8);}
 
      max;
      f=0; for i=1 to k : f=f+g[i];
      print(' chek max concentration');
      print('fun=',fun:12:9,' jp=',jp:3,' cmax= ',cp[iz,jp]:12:8,' summa G= ',f:15:8);
-
-
 
      print('  ¤«п ®Є®­з ­Ёп ­ ¦ вм ENTER  '); readln;
 end.
